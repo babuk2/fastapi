@@ -28,8 +28,6 @@ uvicorn==0.17.6
 uvloop==0.16.0
 watchgod==0.8.2
 websockets==10.3
-
-# 추가된 패키지
 annotated-types==0.6.0
 async-timeout==4.0.3
 asyncpg==0.29.0
