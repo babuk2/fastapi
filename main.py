@@ -1,16 +1,14 @@
 from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 
-app = FastAPI()
-app.mount("/", StaticFiles(directory="public", html = True), name="static")
+from router import test, api, front_preferences
 
-@app.get("/test", response_class=HTMLResponse)
-async def read_root():
-    return """
-    <html>
-        <body>
-            <h1>되는거냐?!</h1>
-        </body>
-    </html>
-    """
+app = FastAPI()
+#라우터 등록
+app.include_router(test.router)
+app.include_router(api.router)
+app.include_router(front_preferences.router)
+
+# StaticFiles는 최하위 경로로 처리
+app.mount("/", StaticFiles(directory="public", html=True), name="static")
